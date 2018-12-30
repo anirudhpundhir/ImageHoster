@@ -28,8 +28,8 @@ public class ImageController {
     private TagService tagService;
 
     //This method displays all the images in the user home page after successful login
-    @RequestMapping("images")
-    public String getUserImages(Model model) {
+    @RequestMapping("")
+    public String getUserImimagesages(Model model) {
         List<Image> images = imageService.getAllImages();
         model.addAttribute("images", images);
         return "images";
