@@ -1,4 +1,3 @@
-/*
 package ImageHoster.controller;
 
 import ImageHoster.model.User;
@@ -52,13 +51,13 @@ public class UserControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
 
         this.mockMvc.perform(post("/users/registration")
@@ -73,13 +72,13 @@ public class UserControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
 
         this.mockMvc.perform(post("/users/registration")
@@ -102,8 +101,8 @@ public class UserControllerTest {
     @Test
     public void signinWithWrongCredentials() throws Exception {
         User userSignin = new User();
-        userSignin.setUsername("Abhi");
-        userSignin.setPassword("password1@");
+        userSignin.setUsername("anirudh");
+        userSignin.setPassword("anirudh123");
 
         Mockito.when(userService.login(Mockito.anyObject())).thenReturn(null);
         session = new MockHttpSession();
@@ -122,17 +121,17 @@ public class UserControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         User userSignin = new User();
-        userSignin.setUsername("Abhi");
-        userSignin.setPassword("password1@");
+        userSignin.setUsername("anirudh");
+        userSignin.setPassword("anirudh123");
 
         Mockito.when(userService.login(Mockito.anyObject())).thenReturn(user);
         session = new MockHttpSession();
@@ -151,13 +150,13 @@ public class UserControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -167,4 +166,3 @@ public class UserControllerTest {
                 .andExpect(content().string(containsString("Image Hoster")));
     }
 }
-*/

@@ -1,4 +1,3 @@
-/*
 package ImageHoster.controller;
 
 import ImageHoster.model.Image;
@@ -46,13 +45,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -69,13 +68,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -101,13 +100,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -124,13 +123,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -156,13 +155,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -197,13 +196,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -211,13 +210,13 @@ public class ImageControllerTest {
         User user1 = new User();
         UserProfile userProfile1 = new UserProfile();
         userProfile.setId(2);
-        userProfile.setEmailAddress("p@gmail.com");
-        userProfile.setFullName("Prerna");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("abc@gmail.com");
+        userProfile.setFullName("Test User");
+        userProfile.setMobileNumber("1234567890");
         user.setProfile(userProfile1);
         user.setId(2);
-        user.setUsername("Prerna");
-        user.setPassword("password1@@");
+        user.setUsername("test1");
+        user.setPassword("password123");
 
         Image image = new Image();
         image.setId(1);
@@ -240,13 +239,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -272,13 +271,13 @@ public class ImageControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -286,13 +285,13 @@ public class ImageControllerTest {
         User user1 = new User();
         UserProfile userProfile1 = new UserProfile();
         userProfile.setId(2);
-        userProfile.setEmailAddress("p@gmail.com");
-        userProfile.setFullName("Prerna");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("abc@gmail.com");
+        userProfile.setFullName("Test User");
+        userProfile.setMobileNumber("1234567890");
         user.setProfile(userProfile1);
         user.setId(2);
-        user.setUsername("Prerna");
-        user.setPassword("password1@@");
+        user.setUsername("test1");
+        user.setPassword("password123");
 
         Image image = new Image();
         image.setId(1);
@@ -309,5 +308,3 @@ public class ImageControllerTest {
                 .andExpect(model().attribute("deleteError", "Only the owner of the image can delete the image"));
     }
 }
-
-*/

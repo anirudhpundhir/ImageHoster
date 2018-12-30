@@ -1,4 +1,3 @@
-/*
 package ImageHoster.controller;
 
 
@@ -40,13 +39,13 @@ public class CommentControllerTest {
         User user = new User();
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
-        userProfile.setEmailAddress("a@gmail.com");
-        userProfile.setFullName("Abhi Mahajan");
-        userProfile.setMobileNumber("9876543210");
+        userProfile.setEmailAddress("anirudhpundhir@gmail.com");
+        userProfile.setFullName("Anirudh Pundhir");
+        userProfile.setMobileNumber("9718493474");
         user.setProfile(userProfile);
         user.setId(1);
-        user.setUsername("Abhi");
-        user.setPassword("password1@");
+        user.setUsername("anirudh");
+        user.setPassword("anirudh123");
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
@@ -65,4 +64,3 @@ public class CommentControllerTest {
                 .andExpect(redirectedUrl("/images/1/new"));
     }
 }
-*/
