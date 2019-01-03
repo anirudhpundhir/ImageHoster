@@ -36,7 +36,7 @@ public class CommentController {
     @RequestMapping(value = "/image/{imageId}/{imageTitle}/comments", method = RequestMethod.POST)
     public String createComment(@PathVariable("imageId") Integer imageId, @PathVariable("imageTitle") String imageTitle, @RequestParam("comment") String text,Comment comment, HttpSession session) throws IOException {
         User user = (User) session.getAttribute("loggeduser");
-        Image image = imageService.getImageById(imageId);
+        Image image = imageService.getImage(imageId);
         comment.setUser(user);
         comment.setText(text);
         comment.setImage(image);
