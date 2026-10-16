@@ -75,14 +75,13 @@ public class UserControllerTest {
         user.setProfile(userProfile);
         user.setId(1);
         user.setUsername("anirudh");
-        user.setPassword("anirudh123");
+        user.setPassword("anirudh@123");
 
 
         this.mockMvc.perform(post("/users/registration")
                 .flashAttr("user", user)
         )
-                .andExpect(view().name("users/login"))
-                .andExpect(content().string(containsString("Please Login:")));
+                .andExpect(redirectedUrl("/users/login"));
     }
 
     //This test checks the controller logic for user signin when user requests for a signin form where he can enter the username and password and checks whether the logic returns the html file 'users/login.html'
@@ -114,6 +113,7 @@ public class UserControllerTest {
 
 
     //This test checks the controller logic for user signin when user enters the username and password that has been registered and sends the POST request to the server and checks whether the logic redirects to the request handling method with request mapping of type "/images"
+    @Test
     public void signinWithCorrectCredentials() throws Exception {
         User user = new User();
         UserProfile userProfile = new UserProfile();
