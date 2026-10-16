@@ -4,14 +4,12 @@ import ImageHoster.model.User;
 import ImageHoster.model.UserProfile;
 import ImageHoster.service.ImageService;
 import ImageHoster.service.UserService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -21,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 
@@ -104,7 +101,7 @@ public class UserControllerTest {
         userSignin.setUsername("anirudh");
         userSignin.setPassword("anirudh123");
 
-        Mockito.when(userService.login(Mockito.anyObject())).thenReturn(null);
+        Mockito.when(userService.login(Mockito.any())).thenReturn(null);
         session = new MockHttpSession();
 
 
@@ -133,7 +130,7 @@ public class UserControllerTest {
         userSignin.setUsername("anirudh");
         userSignin.setPassword("anirudh123");
 
-        Mockito.when(userService.login(Mockito.anyObject())).thenReturn(user);
+        Mockito.when(userService.login(Mockito.any())).thenReturn(user);
         session = new MockHttpSession();
 
 
