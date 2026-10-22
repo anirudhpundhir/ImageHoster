@@ -4,14 +4,12 @@ import ImageHoster.model.User;
 import ImageHoster.model.UserProfile;
 import ImageHoster.service.ImageService;
 import ImageHoster.service.UserService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -21,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 
@@ -78,14 +75,13 @@ public class UserControllerTest {
         user.setProfile(userProfile);
         user.setId(1);
         user.setUsername("anirudh");
-        user.setPassword("anirudh123");
+        user.setPassword("anirudh@123");
 
 
         this.mockMvc.perform(post("/users/registration")
                 .flashAttr("user", user)
         )
-                .andExpect(view().name("users/login"))
-                .andExpect(content().string(containsString("Please Login:")));
+                .andExpect(redirectedUrl("/users/login"));
     }
 
     //This test checks the controller logic for user signin when user requests for a signin form where he can enter the username and password and checks whether the logic returns the html file 'users/login.html'
@@ -104,7 +100,7 @@ public class UserControllerTest {
         userSignin.setUsername("anirudh");
         userSignin.setPassword("anirudh123");
 
-        Mockito.when(userService.login(Mockito.anyObject())).thenReturn(null);
+        Mockito.when(userService.login(Mockito.any())).thenReturn(null);
         session = new MockHttpSession();
 
 
@@ -117,6 +113,7 @@ public class UserControllerTest {
 
 
     //This test checks the controller logic for user signin when user enters the username and password that has been registered and sends the POST request to the server and checks whether the logic redirects to the request handling method with request mapping of type "/images"
+    @Test
     public void signinWithCorrectCredentials() throws Exception {
         User user = new User();
         UserProfile userProfile = new UserProfile();
@@ -133,7 +130,7 @@ public class UserControllerTest {
         userSignin.setUsername("anirudh");
         userSignin.setPassword("anirudh123");
 
-        Mockito.when(userService.login(Mockito.anyObject())).thenReturn(user);
+        Mockito.when(userService.login(Mockito.any())).thenReturn(user);
         session = new MockHttpSession();
 
 

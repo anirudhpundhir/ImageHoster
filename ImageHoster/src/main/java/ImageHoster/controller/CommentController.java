@@ -30,7 +30,7 @@ public class CommentController {
     //The method adds the new comment to the comments table
     //Set the user using Http Session
     //Call the updateComment() method in the business logic to update the comment
-    //Re direct Direct to the /images/" + imageId
+    //Redirect to the image page /images/{imageId}/{imageTitle}
     //The method also receives tags parameter which is a string of all the tags separated by a comma using the annotation @RequestParam,@PathVariable
 
     @RequestMapping(value = "/image/{imageId}/{imageTitle}/comments", method = RequestMethod.POST)
@@ -42,7 +42,7 @@ public class CommentController {
         comment.setImage(image);
         comment.setCreatedDate(new Date());
         commentService.updateComment(comment);
-        return "redirect:/images/" + imageId;
+        return "redirect:/images/" + imageId + "/" + imageTitle;
     }
 
 }

@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 @Controller
 public class UserController {
+
+    static final String PASSWORD_TYPE_ERROR = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
+    private static final Pattern STRONG_PASSWORD_LETTER = Pattern.compile("[A-Za-z]");
+    private static final Pattern STRONG_PASSWORD_DIGIT = Pattern.compile("[0-9]");
+    private static final Pattern STRONG_PASSWORD_SPECIAL = Pattern.compile("[^A-Za-z0-9]");
 
     @Autowired
     private UserService userService;
@@ -40,9 +46,25 @@ public class UserController {
     //This controller method is called when the request pattern is of type 'users/registration' and also the incoming request is of POST type
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
-    public String registerUser(User user) {
+    public String registerUser(User user, Model model) {
+        if (!isStrongPassword(user.getPassword())) {
+            if (user.getProfile() == null) {
+                user.setProfile(new UserProfile());
+            }
+            model.addAttribute("User", user);
+            model.addAttribute("passwordTypeError", PASSWORD_TYPE_ERROR);
+            return "users/registration";
+        }
         userService.registerUser(user);
         return "redirect:/users/login";
+    }
+
+    //A password must contain at least one letter, one digit and one character that is neither
+    static boolean isStrongPassword(String password) {
+        return password != null
+                && STRONG_PASSWORD_LETTER.matcher(password).find()
+                && STRONG_PASSWORD_DIGIT.matcher(password).find()
+                && STRONG_PASSWORD_SPECIAL.matcher(password).find();
     }
 
     //This controller method is called when the request pattern is of type 'users/login'

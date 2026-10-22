@@ -17,9 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ImageController {
+
+    static final String EDIT_ERROR = "Only the owner of the image can edit the image";
+    static final String DELETE_ERROR = "Only the owner of the image can delete the image";
 
     @Autowired
     private ImageService imageService;
@@ -28,8 +32,8 @@ public class ImageController {
     private TagService tagService;
 
     //This method displays all the images in the user home page after successful login
-    @RequestMapping("")
-    public String getUserImimagesages(Model model) {
+    @RequestMapping("/images")
+    public String getUserImages(Model model) {
         List<Image> images = imageService.getAllImages();
         model.addAttribute("images", images);
         return "images";
@@ -45,11 +49,11 @@ public class ImageController {
     //Also now you need to add the tags of an image in the Model type object
     //Here a list of tags is added in the Model type object
     //this list is then sent to 'images/image.html' file and the tags are displayed
-    @RequestMapping("/images/{title}")
-    public String showImage(@PathVariable("title") String title, Model model) {
-        Image image = imageService.getImageByTitle(title);
-        model.addAttribute("image", image);
-        model.addAttribute("tags", image.getTags());
+    //Images are looked up by id; the title in the URL is only for readability, since titles are not unique
+    @RequestMapping("/images/{imageId}/{title}")
+    public String showImage(@PathVariable("imageId") Integer imageId, @PathVariable("title") String title, Model model) {
+        Image image = imageService.getImage(imageId);
+        addImageDetails(image, model);
         return "images/image";
     }
 
@@ -92,8 +96,13 @@ public class ImageController {
     //The method first needs to convert the list of all the tags to a string containing all the tags separated by a comma and then add this string in a Model type object
     //This string is then displayed by 'edit.html' file as previous tags of an image
     @RequestMapping(value = "/editImage")
-    public String editImage(@RequestParam("imageId") Integer imageId, Model model) {
+    public String editImage(@RequestParam("imageId") Integer imageId, Model model, HttpSession session) {
         Image image = imageService.getImage(imageId);
+        if (!isOwner(image, session)) {
+            addImageDetails(image, model);
+            model.addAttribute("editError", EDIT_ERROR);
+            return "images/image";
+        }
 
         String tags = convertTagsToString(image.getTags());
         model.addAttribute("image", image);
@@ -113,9 +122,14 @@ public class ImageController {
     //The method also receives tags parameter which is a string of all the tags separated by a comma using the annotation @RequestParam
     //The method converts the string to a list of all the tags using findOrCreateTags() method and sets the tags attribute of an image as a list of all the tags
     @RequestMapping(value = "/editImage", method = RequestMethod.PUT)
-    public String editImageSubmit(@RequestParam("file") MultipartFile file, @RequestParam("imageId") Integer imageId, @RequestParam("tags") String tags, Image updatedImage, HttpSession session) throws IOException {
+    public String editImageSubmit(@RequestParam("file") MultipartFile file, @RequestParam("imageId") Integer imageId, @RequestParam("tags") String tags, Image updatedImage, HttpSession session, Model model) throws IOException {
 
         Image image = imageService.getImage(imageId);
+        if (!isOwner(image, session)) {
+            addImageDetails(image, model);
+            model.addAttribute("editError", EDIT_ERROR);
+            return "images/image";
+        }
         String updatedImageData = convertUploadedFileToBase64(file);
         List<Tag> imageTags = findOrCreateTags(tags);
 
@@ -132,7 +146,7 @@ public class ImageController {
         updatedImage.setDate(new Date());
 
         imageService.updateImage(updatedImage);
-        return "redirect:/images/" + updatedImage.getTitle();
+        return "redirect:/images/" + updatedImage.getId() + "/" + updatedImage.getTitle();
     }
 
 
@@ -140,11 +154,30 @@ public class ImageController {
     //The method calls the deleteImage() method in the business logic passing the id of the image to be deleted
     //Looks for a controller method with request mapping of type '/images'
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
-    public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId) {
+    public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, Model model, HttpSession session) {
+        Image image = imageService.getImage(imageId);
+        if (!isOwner(image, session)) {
+            addImageDetails(image, model);
+            model.addAttribute("deleteError", DELETE_ERROR);
+            return "images/image";
+        }
         imageService.deleteImage(imageId);
         return "redirect:/images";
     }
 
+
+    //Only the user who uploaded an image may edit or delete it
+    private boolean isOwner(Image image, HttpSession session) {
+        User loggedUser = (User) session.getAttribute("loggeduser");
+        return loggedUser != null && image.getUser() != null
+                && loggedUser.getId() != null
+                && Objects.equals(loggedUser.getId(), image.getUser().getId());
+    }
+
+    private void addImageDetails(Image image, Model model) {
+        model.addAttribute("image", image);
+        model.addAttribute("tags", image.getTags());
+    }
 
     //This method converts the image to Base64 format
     private String convertUploadedFileToBase64(MultipartFile file) throws IOException {
@@ -176,15 +209,9 @@ public class ImageController {
     //Converts the list of all tags to a single string containing all the tags separated by a comma
     //Returns the string
     private String convertTagsToString(List<Tag> tags) {
-        StringBuilder tagString = new StringBuilder();
-
-        for (int i = 0; i <= tags.size() - 2; i++) {
-            tagString.append(tags.get(i).getName()).append(",");
+        if (tags == null) {
+            return "";
         }
-
-        Tag lastTag = tags.get(tags.size() - 1);
-        tagString.append(lastTag.getName());
-
-        return tagString.toString();
+        return tags.stream().map(Tag::getName).collect(Collectors.joining(","));
     }
 }
